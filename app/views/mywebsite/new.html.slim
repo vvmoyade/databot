@@ -1,0 +1,13 @@
+h2
+  |Add New Website
+= "Pick the website you want to get google analytics summary for."
+.gray-box
+  = form_for @mywebsite, url: mywebsite_index_path, method: :post do |f|
+    .form-group 
+      = label_tag :your_websites
+      = f.collection_select :website_url, $profiles, :website_url, :website_url
+    = f.submit "Continue", class: 'btn btn-primary'
+
+
+
+

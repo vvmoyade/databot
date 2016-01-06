@@ -1,0 +1,11 @@
+.container
+  .progress
+    .progress-bar aria-valuemax="100" aria-valuemin="0" aria-valuenow="40" role="progressbar" style=("width: 30%;")   
+   
+
+  .container
+    .thumps_up
+      = image_tag "thumps_up.png", size: '50'
+      h2
+        |Alright, start by loading your Google profiles:
+      = link_to "Load 'em", new_mywebsite_path, :class=>"btn btn-primary"

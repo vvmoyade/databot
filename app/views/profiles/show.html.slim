@@ -1,0 +1,45 @@
+p#notice
+  = notice
+p
+  strong
+    | Profile index:
+  = @profile.profile_index
+p
+  strong
+    | Name:
+  = @profile.name
+p
+  strong
+    | Users:
+  = @profile.users
+p
+  strong
+    | Newusers:
+  = @profile.newUsers
+p
+  strong
+    | Conversions:
+  = @profile.conversions
+p
+  strong
+    | Pageviews:
+  = @profile.pageviews
+p
+  strong
+    | Avgsessionduration:
+  = @profile.avgSessionDuration
+p
+  strong
+    | Totalevents:
+  = @profile.totalEvents
+p
+  strong
+    | Sessions:
+  = @profile.sessions
+p
+  strong
+    | Mywebsite:
+  = @profile.mywebsite_id
+= link_to 'Edit', edit_profile_path(@profile)
+|  | 
+= link_to 'Back', profiles_path

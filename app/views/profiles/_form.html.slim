@@ -1,0 +1,55 @@
+.container
+  - if current_user
+      = link_to "Sign out",signout_path,:method=>:delete,:class=>"btn btn-primary"
+
+  h2
+    | Profiles: 
+  div
+    = link_to "Reload Profile",edit_profile_path(@profile),:class=>"btn btn-info"
+  div
+    | Enable or disable your daily summaries, set alerting thresholds or configure your Stack channels here.
+  hr
+  .row
+    h3
+      | Web Site Data
+    .col-md-4
+      div
+        = button_tag "Send Summary Now",:onclick=>"send_daily_summary(this,'day', #{@profile.profile_index})",:class=>"btn btn-primary"
+      br
+    = form_for(@profile,:url=> edit_profile_path(@profile),:html=>{:id=>"summary_form"}) do |f|
+      .col-md-5
+        h4
+          b
+            | Summaries
+        = hidden_field_tag "metric_type","day"
+        = f.fields_for :scheduler,@profile.scheduler do |ff|
+          = ff.select :id,options_for_select(set_schedule_options.unshift(["Select summary scheduler", ""]),@profile.scheduler.id)
+        span#time_fields
+          = f.select :hours,options_for_select(Array(0..23),@profile.hours)
+          = f.select :minutes,options_for_select(Array(1..59),@profile.minutes)
+          | UTC
+        br
+        h4
+          | Summary Metrics
+        = f.check_box :users
+        = f.label :users
+        br
+        = f.check_box :newUsers
+        = f.label :newUsers
+        br
+        = f.check_box :conversions
+        = f.label :conversions
+        br
+        = f.check_box :pageviews
+        = f.label :pageviews
+        br
+        = f.check_box :avgSessionDuration
+        = f.label :avgSessionDuration,"Average Session Duration"
+        br
+        = f.check_box :totalEvents
+        = f.label :totalEvents
+        br
+        = f.check_box :sessions
+        = f.label :sessions
+      .col-md-12
+        = f.button "Save Profile", :class=>"btn btn-success pull-right", :onclick=>"send_selecte_metrics(this,'day', #{@profile.profile_index})"

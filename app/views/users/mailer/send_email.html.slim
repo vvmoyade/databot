@@ -1,0 +1,57 @@
+| Hi 
+= @user.name.capitalize
+| . Here is your summary for "All Web Site Data"(
+= @url
+| )
+- if @metric_type=="week"
+    | (Week of 
+    = Date.today.beginning_of_week.strftime('%d/%m/%Y')
+    | ) 
+h2
+  | Overview
+- @info.flatten.map(&:results).each do |metric|
+  - if !metric.first.pageviews.nil?
+    = "#{metric.first.pageviews} page views"
+    |  (
+    = (metric.first.pageviews==0)? "Even to the #{@metric_type} before" : "#{metric.first.pageviews} from the #{@metric_type} before"
+    | ) 
+    br
+  - if !metric.first.new_users.nil?
+    = "#{metric.first.new_users} new users"
+    |  (
+    = (metric.first.new_users==0)? "Even to the #{@metric_type} before" : "#{metric.first.new_users} from the #{@metric_type} before"
+    | ) 
+    br
+  - if !metric.first.users.nil?
+    = "#{metric.first.users} users"
+    |  (
+    = (metric.first.users==0)? "Even to the #{@metric_type} before" : "#{metric.first.users} from the #{@metric_type} before"
+    | ) 
+    br
+  - if !metric.first.avg_session_duration.nil?
+    = "#{metric.first.avg_session_duration} average session duration"
+    = (metric.first.avg_session_duration==0)? "(Even to the #{@metric_type} before)" : "( #{metric.first.avg_session_duration} from the #{@metric_type} before)"
+    br
+  - if !metric.first.sessions.nil?
+    = "#{metric.first.sessions} sessions"
+    |  (
+    = (metric.first.sessions==0)? "Even to the #{@metric_type} before" : "#{metric.first.sessions} from the #{@metric_type} before"
+    | ) 
+    br
+  - if !metric.first.total_events.nil?
+    = "#{metric.first.total_events} total events"
+    |  (
+    = (metric.first.total_events==0)? "Even to the #{@metric_type} before" : "#{metric.first.total_events} from the #{@metric_type} before"
+    | ) 
+    br
+  - if !metric.first.conversions.nil?
+    = "#{metric.first.conversions} conversions"
+    |  (
+    = (metric.first.conversions==0)? "Even to the #{@metric_type} before" : "#{metric.first.conversions} from the #{@metric_type} before"
+    | ) 
+    br
+h2
+    | Top Sources
+
+= @dimension_info.map(&:results).flatten.first.source
+

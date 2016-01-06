@@ -1,0 +1,8 @@
+- flash.each do |name, msg|
+  |  <div class="alert alert-
+  = bootstrap_class_for(name)
+  | "> 
+  button.close[type="button" data-dismiss="alert" aria-hidden="true"]
+    | ×
+  = content_tag :div, msg.split(",").join("\n"), :id => "flash_#{name}"
+  </div>

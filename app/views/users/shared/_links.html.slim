@@ -1,0 +1,9 @@
+<div>
+    - if current_user
+        = link_to "Sign out",signout_path,:method=>:delete,:class=>"btn btn-primary"
+    - elsif devise_mapping.omniauthable?
+      - resource_class.omniauth_providers.each do |provider|
+        = link_to "Sign in with #{OmniAuth::Utils.camelize(provider)}", omniauth_authorize_path(resource_name, provider),:class=>"btn btn-primary"
+        br
+</div>
+
